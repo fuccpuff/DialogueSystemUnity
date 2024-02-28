@@ -4,6 +4,7 @@ public class DialogueManager : MonoBehaviour
 {
     [SerializeField] private DialogueUI dialogueUI;
     [SerializeField] private DialogueService dialogueService;
+
     void Awake()
     {
         if (dialogueService == null)
@@ -14,6 +15,8 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(string dialogueId)
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         Dialogue dialogue = dialogueService.GetDialogue(dialogueId);
         if (dialogue != null)
         {
@@ -40,6 +43,8 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         ResumeGame();
         dialogueUI.HideDialogue();
     }
